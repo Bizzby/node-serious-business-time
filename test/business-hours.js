@@ -22,8 +22,7 @@ describe('BusinessTime', function () {
             6: null
         }
 
-    var bizTime = sbt.createInstance(workinghours);
-
+    var bizTime = sbt.createInstance(workinghours, moment);
 
     describe('isWorkingDay', function () {
 
@@ -177,12 +176,6 @@ describe('BusinessTime', function () {
 
         });
 
-        describe.skip('adding a combination of units', function () {
-            it('can handle combinations of hours, minutes, seconds etc', function () {
-                moment(now).addWorkingTime(9, 'hours', 48, 'minutes', 17, 'seconds').format(full).should.equal('2015-02-27 12:00:51.000');
-            });
-        });
-
         describe.skip('adding an unknown unit', function () {
 
             it('should return self', function () {
@@ -274,15 +267,15 @@ describe('BusinessTime', function () {
         describe('subtracting milliseconds', function () {
 
             it('adds time simply if space within current working day', function () {
-                bizTime.subtractWorkingTime(moment(now),555, 'milliseconds').format(full).should.equal('2015-02-26 16:12:33.445');
+                bizTime.subtractWorkingTime(moment(now), 555, 'milliseconds').format(full).should.equal('2015-02-26 16:12:33.445');
             });
 
             it('starts from beginning of next working day if not called at an "open" time', function () {
-                bizTime.subtractWorkingTime(moment(weekend),555, 'milliseconds').format(full).should.equal('2015-02-27 16:59:59.445');
+                bizTime.subtractWorkingTime(moment(weekend), 555, 'milliseconds').format(full).should.equal('2015-02-27 16:59:59.445');
             });
 
             it('runs over to next day if insufficient space in current day', function () {
-                bizTime.subtractWorkingTime(moment('2015-02-26T09:00:00.100'),555, 'milliseconds').format(full).should.equal('2015-02-25 16:59:59.545');
+                bizTime.subtractWorkingTime(moment('2015-02-26T09:00:00.100'), 555, 'milliseconds').format(full).should.equal('2015-02-25 16:59:59.545');
             });
 
         });

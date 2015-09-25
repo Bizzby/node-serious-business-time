@@ -1,8 +1,8 @@
 var BusinessTime = require('./lib/BusinessTime');
 
-exports.createInstance = function(workingHours){
+exports.createInstance = function(workingHours, moment){
 
-    return new BusinessTime(workingHours);
+    return new BusinessTime(workingHours, moment);
 
 }
 
