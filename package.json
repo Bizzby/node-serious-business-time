@@ -6,8 +6,15 @@
   "scripts": {
     "test": "mocha test/. --require test/init.js --reporter dot"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bizzby/node-serious-business-time.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bizzby/node-serious-business-time/issues"
+  },
   "author": "sandfox",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
