@@ -84,6 +84,7 @@ describe('BusinessTime', function () {
             it('adds working days onto date', function () {
                 bizTime.addWorkingTime( moment(now), 2, 'days').format(date).should.equal('2015-03-02');
                 bizTime.addWorkingTime( moment(now), 10, 'days').format(date).should.equal('2015-03-12');
+                bizTime.addWorkingTime( moment(now), 100, 'days').format(date).should.equal('2015-07-16');
             });
 
             it('handles singular as well as plural units', function () {
@@ -116,6 +117,9 @@ describe('BusinessTime', function () {
 
             it('handles running over multiple nights', function () {
                 bizTime.addWorkingTime( moment(now), 19, 'hours').format(full).should.equal('2015-03-02 13:12:34.000');
+            });
+            it('handles running over multiple weeks', function () {
+                bizTime.addWorkingTime( moment(now), 100, 'hours').format(full).should.equal('2015-03-17 14:12:34.000');
             });
 
         });
