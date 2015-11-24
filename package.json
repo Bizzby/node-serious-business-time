@@ -1,6 +1,6 @@
 {
   "name": "serious-business-time",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "rewrite of moment-business-time",
   "main": "index.js",
   "scripts": {
