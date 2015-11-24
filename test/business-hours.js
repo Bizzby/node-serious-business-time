@@ -119,7 +119,7 @@ describe('BusinessTime', function () {
                 bizTime.addWorkingTime( moment(now), 19, 'hours').format(full).should.equal('2015-03-02 13:12:34.000');
             });
             it('handles running over multiple weeks', function () {
-                bizTime.addWorkingTime( moment(now), 100, 'hours').format(full).should.equal('2015-03-17 14:12:34.000');
+                bizTime.addWorkingTime( moment(now), 108, 'hours').format(full).should.equal('2015-03-17 14:12:34.000');
             });
 
         });
@@ -232,6 +232,9 @@ describe('BusinessTime', function () {
 
             it('handles running over multiple nights', function () {
                 bizTime.subtractWorkingTime(moment(now),19, 'hours').format(full).should.equal('2015-02-24 13:12:34.000');
+            });
+            it('handles running over multiple weeks', function () {
+                bizTime.subtractWorkingTime( moment(now), 108, 'hours').format(full).should.equal('2015-02-09 12:12:34.000');
             });
 
         });
