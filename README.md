@@ -17,6 +17,7 @@ npm install [--save] serious-business-time
 
 ## Usage
 
+```
 var SeriousBusinessTime = require('serious-business-time');
 var moment = require('moment');
 
@@ -30,7 +31,7 @@ var workinghours = {
     6: null
 }
 
-var myBusinessTime = SeriousBusinessTime.createInstance(workinghours, moment);
+var myBusinessTime = SeriousBusinessTime.createInstance(moment, workinghours);
 ```
 
 

@@ -22,7 +22,7 @@ describe('BusinessTime', function () {
             6: null
         }
 
-    var bizTime = sbt.createInstance(workinghours, moment);
+    var bizTime = sbt.createInstance(moment, workinghours);
 
     describe('isWorkingDay', function () {
 
