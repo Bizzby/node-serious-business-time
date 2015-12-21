@@ -31,7 +31,10 @@ var workinghours = {
     6: null
 }
 
-var myBusinessTime = SeriousBusinessTime.createInstance(moment, workinghours);
+// optional, if not specified defaults to empty array
+var holidays = [];
+
+var myBusinessTime = SeriousBusinessTime.createInstance(moment, workinghours, holidays);
 ```
 
 
@@ -174,33 +177,32 @@ myBusinessTime.workingDiff(moment('2015-02-27T16:30:00Z'), moment('2015-02-26T12
 
 ### Holidays
 
-__NOT YET IMPLEMENTED__
 
-Holidays which should not be considered as working days can be configured by passing them as locale information.
+Holidays which should not be considered as working days can be configured by passing them as array as the third parameter.
 
 Example:
 
 ```javascript
-moment.locale('en', {
-    holidays: [
+var holidays = [
         '2015-05-04'
-    ]
-});
-moment('2015-05-04').isWorkingDay() // false
+    ];
+
+var myBizTime = SeriousBusinessTime.createInstance(moment, workinghours, holidays)
+
+myBizTime.isWorkingDay(moment('2015-05-04')) // false
 ```
 
 Recurring holidays can also be set with wildcard parameters.
 
 ```javascript
-moment.locale('en', {
-    holidays: [
-        '*-12-25'
-    ]
-});
-moment('2015-12-25').isWorkingDay() // false
-moment('2016-12-25').isWorkingDay() // false
-moment('2017-12-25').isWorkingDay() // false
-moment('2018-12-25').isWorkingDay() // false
+var holidays: ['*-12-25'];
+
+var myBizTime = SeriousBusinessTime.createInstance(moment, workinghours, holidays)
+
+myBizTime.isWorkingDay(moment('2015-12-25')) // false
+myBizTime.isWorkingDay(moment('2016-12-25')) // false
+myBizTime.isWorkingDay(moment('2017-12-25')) // false
+myBizTime.isWorkingDay(moment('2018-12-25')) // false
 ```
 
 ## Running tests

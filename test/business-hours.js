@@ -367,43 +367,34 @@ describe('BusinessTime', function () {
 
     });
 
-    describe.skip('holidays', function () {
+    describe('holidays', function () {
 
-        beforeEach(function () {
-            moment.locale('en');
-            moment.locale('en', {
-                holidays: [
-                    '2015-02-27',
-                    '*-12-25'
-                ]
-            });
-        });
+        var holidays = [
+                '2015-02-27',
+                '*-12-25'
+            ]
 
-        afterEach(function () {
-            moment.locale('en', {
-                holidays: []
-            });
-        });
+        var bizTime = sbt.createInstance(moment, workinghours, holidays);
 
         it('does not count holidays as working days', function () {
-            moment('2015-02-27').isWorkingDay().should.be.false;
+            bizTime.isWorkingDay(moment('2015-02-27')).should.be.false;
         });
 
         it('does not include holidays when adding working time', function () {
-            moment('2015-02-26').addWorkingTime(3, 'days').format(date).should.equal('2015-03-04');
-            moment('2015-02-26T12:00:00Z').addWorkingTime(8, 'hours').format(full).should.equal('2015-03-02 12:00:00.000');
+            bizTime.addWorkingTime(moment('2015-02-26'), 3, 'days').format(date).should.equal('2015-03-04');
+            bizTime.addWorkingTime(moment('2015-02-26T12:00:00Z'), 8, 'hours').format(full).should.equal('2015-03-02 12:00:00.000');
         });
 
         it('does not include holidays when adding calculating diffs', function () {
-            moment('2015-03-02T12:00:00Z').workingDiff('2015-02-26T12:00:00Z', 'hours').should.equal(8);
+            bizTime.workingDiff(moment('2015-03-02T12:00:00Z'), moment('2015-02-26T12:00:00Z'), 'hours').should.equal(8);
         });
 
         it('supports holidays as wildcards', function () {
-            moment('2015-12-25').isWorkingDay().should.be.false;
-            moment('2016-12-25').isWorkingDay().should.be.false;
-            moment('2017-12-25').isWorkingDay().should.be.false;
-            moment('2018-12-25').isWorkingDay().should.be.false;
-            moment('2019-12-25').isWorkingDay().should.be.false;
+            bizTime.isWorkingDay(moment('2015-12-25')).should.be.false;
+            bizTime.isWorkingDay(moment('2016-12-25')).should.be.false;
+            bizTime.isWorkingDay(moment('2017-12-25')).should.be.false;
+            bizTime.isWorkingDay(moment('2018-12-25')).should.be.false;
+            bizTime.isWorkingDay(moment('2019-12-25')).should.be.false;
         });
 
     });
